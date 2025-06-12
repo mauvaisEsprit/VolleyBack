@@ -4,9 +4,9 @@ const eventController = require('../controllers/EventController');
 const isAdmin = require('../middleware/isAdmin')
 
 router.get('/', eventController.getAllEvents);
-router.get('/:id', eventController.getEventBySlug);
+router.get('/:slug', eventController.getEventBySlug);
 router.post('/', isAdmin, eventController.createEvent);
-router.put('/:id', isAdmin, eventController.updateEvent);
-router.delete('/:id', isAdmin, eventController.deleteEvent);
+router.put('/:slug', isAdmin, eventController.updateEvent);
+router.delete('/:slug', isAdmin, eventController.deleteEvent);
 
 module.exports = router;

@@ -51,7 +51,7 @@ async function sendReplyToClientEmail(message) {
           </tr>
           <tr>
             <td style="font-size:12px;color:#aaa;text-align:center;padding-top:20px">
-              © ${currentYear} Blue Coast. Tous droits réservés.
+              © ${currentYear} Arbent Volley. Tous droits réservés.
             </td>
           </tr>
         </table>

@@ -41,7 +41,7 @@ async function sendReplyToClientEmail(message) {
           <tr>
             <td style="padding-top:30px;font-size:16px;color:#555">
               Cordialement,<br />
-              L'équipe Blue&nbsp;Coast
+              L'équipe Arbent&nbsp;Volley
             </td>
           </tr>
           <tr>

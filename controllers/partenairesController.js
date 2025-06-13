@@ -1,4 +1,4 @@
-const Partenaire = require("../models/Partenaire");
+const Partenaire = require("../models/Partenaires");
 
 /* GET /api/partners */
 exports.getAll = async (req, res) => {

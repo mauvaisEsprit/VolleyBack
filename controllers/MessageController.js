@@ -49,24 +49,22 @@ exports.createMessage = async (req, res) => {
 exports.replyMessage = async (req, res) => {
   try {
     const { id } = req.params;
-    
 
-    const message = await Message.findByIdAndUpdate(id, { replied: true }, { new: true });
-
+    const message = await Message.findById(id);
     if (!message) return res.status(404).json({ error: "Сообщение не найдено" });
 
-    await sendReplyToClientEmail(
-      message,
-    );
+    await sendReplyToClientEmail(message);
 
     message.replied = true;
     await message.save();
 
-    res.json({ success: true });
+    res.json({ success: true, message: "Ответ успешно отправлен" });
   } catch (err) {
+    console.error("Ошибка при ответе на сообщение:", err);
     res.status(500).json({ error: "Ошибка при отправке ответа" });
-  }
-};
+  };
+}
+
 
 // Удалить сообщение по id (только для админа)
 exports.deleteMessage = async (req, res) => {

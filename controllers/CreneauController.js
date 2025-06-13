@@ -14,8 +14,8 @@ exports.getAllCreneaux = async (req, res) => {
 // Создать новый creneau
 exports.createCreneau = async (req, res) => {
   try {
-    const { weekday, startTime, endTime, coachName, location } = req.body;
-    const newCreneau = new Creneau({ weekday, startTime, endTime, coachName, location });
+    const { weekday, startTime, endTime, coachName, location, concerned } = req.body;
+    const newCreneau = new Creneau({ weekday, startTime, endTime, coachName, location, concerned, });
     await newCreneau.save();
     res.status(201).json(newCreneau);
   } catch (err) {

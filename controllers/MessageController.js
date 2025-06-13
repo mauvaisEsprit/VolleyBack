@@ -1,4 +1,6 @@
 const Message = require('../models/Message');
+const { sendReplyToClientEmail } = require("../utils/messageContact");
+
 
 // Получить все сообщения
 exports.getAllMessages = async (req, res) => {
@@ -39,6 +41,30 @@ exports.createMessage = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Ошибка сервера при создании сообщения' });
+  }
+};
+
+
+// ✅ Ответить на сообщение
+exports.replyMessage = async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+
+    const message = await Message.findByIdAndUpdate(id, { replied: true }, { new: true });
+
+    if (!message) return res.status(404).json({ error: "Сообщение не найдено" });
+
+    await sendReplyToClientEmail(
+      message,
+    );
+
+    message.replied = true;
+    await message.save();
+
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ error: "Ошибка при отправке ответа" });
   }
 };
 

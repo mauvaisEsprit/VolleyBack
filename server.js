@@ -16,6 +16,7 @@ app.use("/api", require("./routes/authAdmin"));
 app.use("/api/events", require("./routes/EventRoutes"));
 app.use("/api/news", require("./routes/NewsRoutes"));
 app.use("/api/contact", require("./routes/MessageRoutes"));
+app.use("/api/partners", require("./routes/partenaireRoutes"));
 app.use("/", require("./routes/pingRoute"));
 
 

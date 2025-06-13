@@ -13,6 +13,7 @@ const messageSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  replied: { type: Boolean, default: false },
 }, {
   timestamps: true, // автоматически добавит createdAt и updatedAt
 });

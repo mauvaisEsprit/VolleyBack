@@ -18,6 +18,10 @@ const creneauSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  concerned: {
+    type: String,
+    required: true,
+  },
   location: {
     type: String,
     required: true,

@@ -25,7 +25,6 @@ exports.getMessageById = async (req, res) => {
   }
 };
 
-// Создать новое сообщение
 exports.createMessage = async (req, res) => {
   try {
     const { name, email, message } = req.body;
@@ -35,18 +34,21 @@ exports.createMessage = async (req, res) => {
     }
 
     const newMessage = new Message({ name, email, message });
-
-    
-
     await newMessage.save();
 
-    await sendReplyToClientEmail(message);
+    // сначала отвечаем клиенту
     res.status(201).json(newMessage);
+
+    // письмо отправляем асинхронно, чтобы его сбой не ломал API‑ответ
+    sendReplyToClientEmail({ name, email, message })
+      .catch(err => console.error('Mail error:', err));
+
   } catch (error) {
-    console.error(error);
+    console.error('Create message error:', error);
     res.status(500).json({ message: 'Ошибка сервера при создании сообщения' });
   }
 };
+
 
 
 // ✅ Ответить на сообщение

@@ -35,6 +35,9 @@ exports.createMessage = async (req, res) => {
     }
 
     const newMessage = new Message({ name, email, message });
+    
+    await sendReplyToClientEmail(message);
+
     await newMessage.save();
 
     res.status(201).json(newMessage);

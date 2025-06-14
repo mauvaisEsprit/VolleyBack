@@ -40,8 +40,8 @@ exports.createMessage = async (req, res) => {
 
     await newMessage.save();
 
-    res.status(201).json(newMessage);
     await sendReplyToClientEmail(message);
+    res.status(201).json(newMessage);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Ошибка сервера при создании сообщения' });

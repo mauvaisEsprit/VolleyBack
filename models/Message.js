@@ -13,9 +13,18 @@ const messageSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  replied: { type: Boolean, default: false },
+  replyText: {
+    type: String,
+  },
+  replyDate: {
+    type: Date, // <- лучше дата, а не строка
+  },
+  replied: {
+    type: Boolean,
+    default: false,
+  },
 }, {
-  timestamps: true, // автоматически добавит createdAt и updatedAt
+  timestamps: true, // добавляет createdAt и updatedAt
 });
 
 module.exports = mongoose.model('Message', messageSchema, 'messages');

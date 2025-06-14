@@ -76,6 +76,7 @@ exports.replyMessage = async (req, res) => {
 
     message.replied = true;
     message.replyDate = new Date();
+    message.replyText = replyText;
     await message.save();
 
     res.json({ success: true, message: "Ответ успешно отправлен" });

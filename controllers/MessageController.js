@@ -35,12 +35,13 @@ exports.createMessage = async (req, res) => {
     }
 
     const newMessage = new Message({ name, email, message });
+
     
-    await sendReplyToClientEmail(message);
 
     await newMessage.save();
 
     res.status(201).json(newMessage);
+    await sendReplyToClientEmail(message);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Ошибка сервера при создании сообщения' });

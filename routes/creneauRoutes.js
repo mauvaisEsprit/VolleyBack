@@ -1,7 +1,7 @@
 // routes/creneauRoutes.js
 const express = require('express');
 const router = express.Router();
-const creneauController = require('../models/controllers/CreneauController');
+const creneauController = require('../controllers/CreneauController');
 const isAdmin = require('../middleware/isAdmin');
 
 router.get('/', creneauController.getAllCreneaux);

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const ctrl = require("../models/controllers/partenairesController");
+const ctrl = require("../controllers/partenairesController");
 const isAdmin = require("../middleware/isAdmin");
 
 //  /api/partners

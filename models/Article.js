@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-
 const articleSchema = new mongoose.Schema(
   {
     name: {
@@ -18,6 +17,10 @@ const articleSchema = new mongoose.Schema(
     order: {
       type: Number,
       default: 0, // Для сортировки в нужном порядке
+    },
+    image: {
+      type: String, // URL картинки
+      default: "",  // Можно оставить пустым, если нет фото
     },
   },
   { timestamps: true }

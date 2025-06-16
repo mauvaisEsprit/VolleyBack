@@ -1,4 +1,5 @@
-import mongoose from "mongoose";
+const Article = require("../models/Article");
+
 
 const articleSchema = new mongoose.Schema(
   {

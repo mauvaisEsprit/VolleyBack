@@ -11,4 +11,4 @@ const TarifPackSchema = new mongoose.Schema({
   items: [ItemSchema],
 });
 
-module.exports = mongoose.model("TarifPack", TarifPackSchema);
+module.exports = mongoose.model("TarifPack", TarifPackSchema, "tarifpacks");

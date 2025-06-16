@@ -1,4 +1,5 @@
-const TarifPack = require("../TarifPack");
+const TarifPack = require('../models/TarifPack');
+
 
 // Получить все тарифы
 exports.getAll = async (req, res) => {

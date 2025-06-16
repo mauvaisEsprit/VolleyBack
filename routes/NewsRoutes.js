@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const newsController = require('../controllers/NewsController');
+const newsController = require('../models/controllers/NewsController');
 const isAdmin = require('../middleware/isAdmin')
 
 router.get('/', newsController.getAllNews);

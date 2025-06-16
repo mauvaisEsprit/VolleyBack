@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const messageController = require('../controllers/MessageController');
+const messageController = require('../models/controllers/MessageController');
 const isAdmin = require('../middleware/isAdmin')
 
 router.get('/', messageController.getAllMessages);

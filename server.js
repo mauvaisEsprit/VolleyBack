@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const rateLimit = require("./middleware/rateLimitMiddle");
+const limiter = require("./middleware/limiter");
 
 
 app.use(cors());
@@ -13,14 +13,14 @@ const connectDB = require("./config/db");
 connectDB();
 
 // Роуты
-app.use("/api", require("./routes/authAdmin"));
-app.use("/api/events", require("./routes/EventRoutes"));
-app.use("/api/news", require("./routes/NewsRoutes"));
-app.use("/api/contact",  require("./routes/MessageRoutes"));
-app.use("/api/partners", require("./routes/partenaireRoutes"));
-app.use("/api/creneaux", require("./routes/creneauRoutes"));
-app.use("/api/tarifs", require("./routes/tarifsRoutes"));
-app.use("/api/articles", require("./routes/articleRoutes"));
+app.use("/api",limiter, require("./routes/authAdmin"));
+app.use("/api/events", limiter, require("./routes/EventRoutes"));
+app.use("/api/news", limiter, require("./routes/NewsRoutes"));
+app.use("/api/contact", limiter, require("./routes/MessageRoutes"));
+app.use("/api/partners", limiter, require("./routes/partenaireRoutes"));
+app.use("/api/creneaux", limiter, require("./routes/creneauRoutes"));
+app.use("/api/tarifs", limiter, require("./routes/tarifsRoutes"));
+app.use("/api/articles", limiter, require("./routes/articleRoutes"));
 app.use("/", require("./routes/pingRoute"));
 
 

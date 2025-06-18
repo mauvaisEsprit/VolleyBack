@@ -16,7 +16,7 @@ connectDB();
 app.use("/api", require("./routes/authAdmin"));
 app.use("/api/events", require("./routes/EventRoutes"));
 app.use("/api/news", require("./routes/NewsRoutes"));
-app.use("/api/contact", rateLimit,  require("./routes/MessageRoutes"));
+app.use("/api/contact",  require("./routes/MessageRoutes"));
 app.use("/api/partners", require("./routes/partenaireRoutes"));
 app.use("/api/creneaux", require("./routes/creneauRoutes"));
 app.use("/api/tarifs", require("./routes/tarifsRoutes"));

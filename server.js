@@ -26,7 +26,16 @@ app.use((req, res, next) => {
 console.log('mongoSanitize middleware подключен с sanitizeQuery=false');
 
  // защита от NoSQL-инъекций
-app.use(xss()); // защита от XSS
+app.use((req, res, next) => {
+  if (req.body) {
+    for (const key in req.body) {
+      if (typeof req.body[key] === 'string') {
+        req.body[key] = xss(req.body[key]);
+      }
+    }
+  }
+  next();
+}); // защита от XSS
 app.use(hpp()); // защита от дублирующихся параметров
 
 // CORS: разрешён только твой фронтенд

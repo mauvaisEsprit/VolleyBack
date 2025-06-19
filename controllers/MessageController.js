@@ -1,9 +1,10 @@
 const Message = require("../models/Message");
 const { sendReplyToClientEmail } = require("../utils/messageContact");
 const { sendReplyMessageToClientEmail } = require("../utils/messageReponse");
+const asyncHandler = require("../middleware/asyncHandler");
 
 // Получить все сообщения
-exports.getAllMessages = async (req, res) => {
+exports.getAllMessages = asyncHandler (async (req, res) => {
   try {
     const messages = await Message.find().sort({ createdAt: -1 });
     res.json(messages);
@@ -11,10 +12,10 @@ exports.getAllMessages = async (req, res) => {
     console.error(error);
     res.status(500).json({ message: "Ошибка сервера при получении сообщений" });
   }
-};
+});
 
 // Получить сообщение по id
-exports.getMessageById = async (req, res) => {
+exports.getMessageById = asyncHandler (async (req, res) => {
   try {
     const message = await Message.findById(req.params.id);
     if (!message)
@@ -24,9 +25,9 @@ exports.getMessageById = async (req, res) => {
     console.error(error);
     res.status(500).json({ message: "Ошибка сервера при получении сообщения" });
   }
-};
+});
 
-exports.createMessage = async (req, res) => {
+exports.createMessage = asyncHandler (async (req, res) => {
   try {
     const { name, email, message } = req.body;
 
@@ -50,9 +51,9 @@ exports.createMessage = async (req, res) => {
     console.error("Create message error:", error);
     res.status(500).json({ message: "Ошибка сервера при создании сообщения" });
   }
-};
+});
 
-exports.replyMessage = async (req, res) => {
+exports.replyMessage = asyncHandler (async (req, res) => {
   try {
     const { id } = req.params;
     const { replyText } = req.body;
@@ -84,10 +85,10 @@ exports.replyMessage = async (req, res) => {
     console.error("Ошибка при ответе на сообщение:", err);
     res.status(500).json({ error: "Ошибка при отправке ответа" });
   }
-};
+});
 
 // Удалить сообщение по id (только для админа)
-exports.deleteMessage = async (req, res) => {
+exports.deleteMessage = asyncHandler (async (req, res) => {
   try {
     const message = await Message.findById(req.params.id);
     if (!message)
@@ -99,4 +100,4 @@ exports.deleteMessage = async (req, res) => {
     console.error(error);
     res.status(500).json({ message: "Ошибка сервера при удалении сообщения" });
   }
-};
+});

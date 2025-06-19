@@ -57,6 +57,11 @@ if (process.env.NODE_ENV === "development") {
 // Подключение к БД
 connectDB();
 
+console.log("Email reçu:", email);
+console.log("Password reçu:", password);
+console.log("ADMIN_EMAIL:", ADMIN_EMAIL);
+console.log("ADMIN_PASSWORD:", ADMIN_PASSWORD);
+
 // Роуты
 app.use("/api", limiter, require("./routes/authAdmin"));
 app.use("/api/events", limiter, require("./routes/EventRoutes"));

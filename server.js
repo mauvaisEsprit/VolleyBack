@@ -3,7 +3,7 @@ const express = require("express");
 const morgan = require("morgan");
 const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
-const xss = require("xss-clean");
+const xss = require("xss");    
 const hpp = require("hpp");
 const cors = require("cors");
 const limiter = require("./middleware/limiter");
@@ -24,16 +24,16 @@ app.use((req, res, next) => {
   }
   next();
 }); // защита от NoSQL-инъекций
-/*app.use((req, res, next) => {
-  if (req.body) {
+app.use((req, _res, next) => {
+  if (req.body && typeof req.body === "object") {
     for (const key in req.body) {
-      if (typeof req.body[key] === 'string') {
-        req.body[key] = xss(req.body[key]);
+      if (typeof req.body[key] === "string") {
+        req.body[key] = xss(req.body[key]); // реально очищаем строку
       }
     }
   }
   next();
-}); // защита от XSS*/
+});
 app.use(hpp()); // защита от дублирующихся параметров
 
 // CORS: разрешён только твой фронтенд
@@ -58,8 +58,7 @@ if (process.env.NODE_ENV === "development") {
 connectDB();
 
 
-console.log("ADMIN_EMAIL:", process.env.ADMIN_EMAIL);
-console.log("ADMIN_PASSWORD:", process.env.ADMIN_PASSWORD);
+
 
 // Роуты
 app.use("/api", limiter, require("./routes/authAdmin"));

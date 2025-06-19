@@ -18,7 +18,7 @@ const checkValidation = (req, res, next) => {
 router.get('/', asyncHandler, messageController.getAllMessages);
 router.get('/:id', asyncHandler, messageController.getMessageById);
 router.post('/', rateLimit,validator.create, checkValidation, messageController.createMessage);
-router.put("/:id/reply", isAdmin, asyncHandler (essageController.replyMessage));
+router.put("/:id/reply", isAdmin, asyncHandler (messageController.replyMessage));
 router.delete('/:id',isAdmin, asyncHandler (messageController.deleteMessage));
 
 module.exports = router;

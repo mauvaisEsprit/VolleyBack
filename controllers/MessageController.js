@@ -4,7 +4,7 @@ const { sendReplyMessageToClientEmail } = require("../utils/messageReponse");
 const asyncHandler = require("../middleware/asyncHandler");
 
 // Получить все сообщения
-exports.getAllMessages = asyncHandler (async (req, res) => {
+exports.getAllMessages = async (req, res) => {
   try {
    console.time('getAllMessages');
   const messages = await Message.find().sort({ createdAt: -1 }).lean();
@@ -14,7 +14,7 @@ exports.getAllMessages = asyncHandler (async (req, res) => {
     console.error(error);
     res.status(500).json({ message: "Ошибка сервера при получении сообщений" });
   }
-});
+};
 
 // Получить сообщение по id
 exports.getMessageById = asyncHandler (async (req, res) => {

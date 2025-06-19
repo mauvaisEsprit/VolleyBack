@@ -6,8 +6,10 @@ const asyncHandler = require("../middleware/asyncHandler");
 // Получить все сообщения
 exports.getAllMessages = asyncHandler (async (req, res) => {
   try {
-    const messages = await Message.find().sort({ createdAt: -1 });
-    res.json(messages);
+    console.log('Запрос на получение всех сообщений');
+  const messages = await Message.find().sort({ createdAt: -1 });
+  console.log(`Найдено сообщений: ${messages.length}`);
+  res.json(messages);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Ошибка сервера при получении сообщений" });

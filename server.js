@@ -16,9 +16,14 @@ app.disable("x-powered-by"); // скрыть информацию о техно�
 app.use(helmet()); // безопасные заголовки
 app.use(express.json({ limit: "10kb" })); // ограничение размера JSON
 app.use(express.urlencoded({ extended: true }));
+console.log('mongoSanitize middleware подключен с sanitizeQuery=false');
 app.use(mongoSanitize({
-  sanitizeQuery: false,  // Отключить очистку query (если версия поддерживает)
+  sanitizeQuery: false,
+  onSanitize: ({ req, key }) => {
+    console.log(`Sanitized ${key} in request`);
+  },
 }));
+
  // защита от NoSQL-инъекций
 app.use(xss()); // защита от XSS
 app.use(hpp()); // защита от дублирующихся параметров

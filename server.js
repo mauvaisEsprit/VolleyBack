@@ -15,6 +15,7 @@ const app = express();
 app.disable("x-powered-by"); // скрыть информацию о технологии
 app.use(helmet()); // безопасные заголовки
 app.use(express.json({ limit: "10kb" })); // ограничение размера JSON
+app.use(express.urlencoded({ extended: true }));
 app.use(mongoSanitize()); // защита от NoSQL-инъекций
 app.use(xss()); // защита от XSS
 app.use(hpp()); // защита от дублирующихся параметров

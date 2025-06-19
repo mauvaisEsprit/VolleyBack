@@ -17,12 +17,12 @@ app.use(helmet()); // безопасные заголовки
 app.use(express.json({ limit: "10kb" })); // ограничение размера JSON
 app.use(express.urlencoded({ extended: true }));
 console.log('mongoSanitize middleware подключен с sanitizeQuery=false');
-app.use(mongoSanitize({
-  sanitizeQuery: false,
-  onSanitize: ({ req, key }) => {
-    console.log(`Sanitized ${key} in request`);
-  },
-}));
+app.use((req, res, next) => {
+  if (req.body) {
+    req.body = mongoSanitize.sanitize(req.body);
+  }
+  next();
+});
 
  // защита от NoSQL-инъекций
 app.use(xss()); // защита от XSS

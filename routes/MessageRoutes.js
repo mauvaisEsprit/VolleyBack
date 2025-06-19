@@ -15,11 +15,7 @@ const checkValidation = (req, res, next) => {
   next();
 };
 
-router.get('/', (req, res, next) => {
-  console.log('⚡️ [Router] GET /api/contact → enter');
-  next();
-}, messageController.getAllMessages);
-
+router.get('/',  messageController.getAllMessages);
 router.get('/:id', messageController.getMessageById);
 router.post('/', rateLimit,validator.create, checkValidation, messageController.createMessage);
 router.put("/:id/reply", isAdmin, asyncHandler (messageController.replyMessage));

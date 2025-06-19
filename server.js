@@ -58,8 +58,8 @@ if (process.env.NODE_ENV === "development") {
 connectDB();
 
 
-console.log("ADMIN_EMAIL:", ADMIN_EMAIL);
-console.log("ADMIN_PASSWORD:", ADMIN_PASSWORD);
+console.log("ADMIN_EMAIL:", process.env.ADMIN_EMAIL);
+console.log("ADMIN_PASSWORD:", process.env.ADMIN_PASSWORD);
 
 // Роуты
 app.use("/api", limiter, require("./routes/authAdmin"));

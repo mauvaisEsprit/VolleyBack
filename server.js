@@ -10,22 +10,20 @@ const limiter = require("./middleware/limiter");
 const connectDB = require("./config/db");
 
 const app = express();
+app.set('trust proxy', 1);
+
 
 // Защита
 app.disable("x-powered-by"); // скрыть информацию о технологии
 app.use(helmet()); // безопасные заголовки
 app.use(express.json({ limit: "10kb" })); // ограничение размера JSON
 app.use(express.urlencoded({ extended: true }));
-console.log('mongoSanitize middleware подключен с sanitizeQuery=false');
 app.use((req, res, next) => {
   if (req.body) {
     req.body = mongoSanitize.sanitize(req.body);
   }
   next();
-});
-console.log('mongoSanitize middleware подключен с sanitizeQuery=false');
-
- // защита от NoSQL-инъекций
+}); // защита от NoSQL-инъекций
 app.use((req, res, next) => {
   if (req.body) {
     for (const key in req.body) {

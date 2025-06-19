@@ -23,6 +23,7 @@ app.use((req, res, next) => {
   }
   next();
 });
+console.log('mongoSanitize middleware подключен с sanitizeQuery=false');
 
  // защита от NoSQL-инъекций
 app.use(xss()); // защита от XSS
@@ -45,7 +46,6 @@ app.use(cors({
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
-
 
 // Подключение к БД
 connectDB();

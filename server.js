@@ -24,7 +24,7 @@ app.use((req, res, next) => {
   }
   next();
 }); // защита от NoSQL-инъекций
-app.use((req, res, next) => {
+/*app.use((req, res, next) => {
   if (req.body) {
     for (const key in req.body) {
       if (typeof req.body[key] === 'string') {
@@ -33,7 +33,7 @@ app.use((req, res, next) => {
     }
   }
   next();
-}); // защита от XSS
+}); // защита от XSS*/
 app.use(hpp()); // защита от дублирующихся параметров
 
 // CORS: разрешён только твой фронтенд
